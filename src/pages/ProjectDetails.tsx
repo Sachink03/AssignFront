@@ -26,15 +26,13 @@ const ProjectDetails = () => {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const projectData = {
-        id: projectId,
-        name: `Demo Project #${projectId}`,
-        description: 'This is a dummy project used for frontend testing.',
-      };
-
       const response = await Api.get(`/tasks/${projectId}`);
       const fetchedTasks = response.data.tasks || [];
-
+     const projectData = {
+        id: projectId,
+        name: `Demo Project :${fetchedTasks[0].title}`,
+        description: 'This is a dummy project used for frontend testing.',
+      };
       // Ensure exactly 3 editable tasks (existing or new placeholders)
       const paddedTasks = [...fetchedTasks];
       while (paddedTasks.length < 3) {
